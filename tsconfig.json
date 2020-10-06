@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/", // Выходной каталог
+    "sourceMap": true, // Исходные карты
+    "noImplicitAny": true, // Отмена любого типа
+    "module": "es6", // Модульная система
+    "target": "es5",
+    "jsx": "react", // react (по умолчанию) или react-native
+    "allowSyntheticDefaultImports": true, // Разрешить импорты по умолчанию
+    "experimentalDecorators": true, // Включить экспериментальный синтаксис декораторов
+    "resolveJsonModule": true, // Позволяет импортировать модули с расширением «.json»
+    "allowJs": true, // Разрешить импортировать файлы JavaScript
+    "checkJs": true, // Ошибки сообщаются в файлах JavaScript
+    "moduleResolution": "node",
+    "removeComments": true, // Удаляет комментарии при преобразовании в JavaScript
+    "strictNullChecks": true, // строгая проверка null и undefined
+    "esModuleInterop" : true, // Взаимодействие модулей ES
+    "alwaysStrict": true, // Строгий режим
+    "strictPropertyInitialization": true // Строгая инициализация свойства
+  },
+  "include": [ // Эти имена файлов разрешаются относительно каталога
+    "src/**/*"
+  ],
+  "exclude": [ // Задает массив имен файлов или шаблонов, которые следует пропустить при разрешении include
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
