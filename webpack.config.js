@@ -52,8 +52,40 @@ module.exports = {
                 use: ["ts-loader"],
             },
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"],
+                test: /\.((c|sa|sc)ss)$/i, //For Less - /\.((c|le)ss)$/i,
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 2,
+                            modules: {
+                                auto: true, ///\.module\.\w+$/i.test(filename)
+                                exportGlobals: true,
+                                localIdentName:
+                                    "[path][name]__[local]--[hash:base64:5]",
+                            },
+                        },
+                    },
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env",
+                                        {
+                                            // Options
+                                        },
+                                    ],
+                                ],
+                            },
+                        },
+                    },
+                    {
+                        loader: "sass-loader",
+                    },
+                ],
             },
             {
                 test: /\.(png|jpg|gif)$/,
