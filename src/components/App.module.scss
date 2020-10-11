@@ -1,7 +1,6 @@
 .app {
     background-color: rebeccapurple;
+    transform: scale(0.5);
+    display: flex;
 }
 
-.app:fullscreen {
-    font-size: 50px;
-}
