@@ -1,17 +1,11 @@
 import React from "react";
-import HourglassIcon from "./../assets/hourglass.svg";
-import { MyWindow } from "../types";
-import styles from './App.module.scss'
+import styles from "./App.module.scss";
 
-const App = () => {
-    console.log((window as MyWindow).config.baseUrl);
-
+export default function App() {
+    const { app, ohMy } = styles;
     return (
-        <div className={styles.app}>
-            <HourglassIcon />
-            sdf
+        <div className={app}>
+            <h1 className={ohMy}>Oh, my &#10084;</h1>
         </div>
     );
-};
-
-export default App;
+}

@@ -2,7 +2,6 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -111,8 +110,5 @@ module.exports = {
                 { from: "public/config.js" },
             ],
         }),
-        /* new ESLintPlugin({
-            extensions: ['js', 'jsx', 'ts', 'tsx']
-        }) */
     ],
 };
