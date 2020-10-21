@@ -4,7 +4,6 @@ export default function GoldenRatio() {
   const [initialX, setInitialX] = useState<number>(2);
   const [finalX, setFinalX] = useState<number>(20);
   const [accuracy, setAccuracy] = useState<number>(2);
-  //else return "Бесконечный цикл";
 
   const coefficient = (1 + Math.sqrt(5)) / 2;
 
