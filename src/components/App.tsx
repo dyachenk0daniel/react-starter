@@ -1,11 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./App.module.scss";
+import Image from "../assets/tutorial.svg";
 
-export default function App() {
-    const { app, ohMy } = styles;
-    return (
-        <div className={app}>
-            <h1 className={ohMy}>Oh, my &#10084;</h1>
-        </div>
-    );
-}
+const App: FC = () => {
+  const { app, ohMy } = styles;
+  return (
+    <div className={app}>
+      {/* <span className={ohMy}>Oh, my &#10084;</span>  */}
+      <Image />
+    </div>
+  );
+};
+
+export default App;
