@@ -2,6 +2,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: "development",
@@ -33,23 +34,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-react",
-              "@babel/preset-typescript",
-            ],
-          },
         },
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: ["ts-loader"],
       },
       {
         test: /\.((c|sa|sc)ss)$/i, //For Less - /\.((c|le)ss)$/i,
@@ -86,7 +75,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "assets/images",
+              outputPath: "images",
             },
           },
         ],
@@ -98,7 +87,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "assets/fonts",
+              outputPath: "fonts",
             },
           },
         ],
@@ -121,6 +110,9 @@ module.exports = {
         { from: "public/manifest.json" },
         { from: "public/config.js" },
       ],
+    }),
+    new ESLintPlugin({
+      extensions: ["ts", "tsx", "js", "jsx"],
     }),
   ],
 };
