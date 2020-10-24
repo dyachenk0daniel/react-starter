@@ -1,3 +1,3 @@
 var config = {
-  baseUrl: "url",
+  baseUrl: 'url',
 };

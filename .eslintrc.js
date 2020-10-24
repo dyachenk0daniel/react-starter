@@ -12,7 +12,7 @@ module.exports = {
       jsx: true,
     },
   },
-  ignorePatterns: ["/node_modules/*", "/build/*"],
+  ignorePatterns: ['/node_modules/*', '/build/*'],
   plugins: ['react', '@typescript-eslint', 'react-hooks'],
   extends: [
     'eslint:recommended',
@@ -32,7 +32,7 @@ module.exports = {
     'no-extra-parens': 1, //запретить ненужные скобки
     'array-callback-return': 1, //применять операторы return в обратных вызовах методов массива
     'default-case': 1, //требовать регистры default в операторах switch
-    'eqeqeq': 1, // требуют использования `===` и `! ==`
+    eqeqeq: 1, // требуют использования `===` и `! ==`
     'no-alert': 1, // запретить использование ʻalert`, `confirm` и` prompt`
     'no-constructor-return': 1, // запретить возвращение значения из конструктора
     'no-else-return': 1, // запретить блоки ʻelse` после операторов return в операторах ʻif`

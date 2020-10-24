@@ -1,7 +1,7 @@
 @font-face {
   font-family: NotoSansJP;
   src: url(/src/assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf)
-    format("opentype");
+    format('opentype');
 }
 
 * {
