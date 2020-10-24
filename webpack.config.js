@@ -4,8 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-module.exports = (env, argv) => {
+module.exports = (_, argv) => {
+  const isProductionMode = argv.mode === 'production';
   return {
+    mode: isProductionMode ? 'production' : 'development',
     target: 'web',
     entry: {
       index: './src/index.tsx',
@@ -28,10 +30,7 @@ module.exports = (env, argv) => {
       port: 4200,
       // noInfo: true, // Только ошибки и предупреждения о горячей перезагрузке
     },
-    devtool:
-      argv.mode === 'development'
-        ? 'inline-source-map'
-        : argv.mode === 'production' && false,
+    devtool: isProductionMode ? false : 'inline-source-map',
     module: {
       rules: [
         {
