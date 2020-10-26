@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = (_, argv) => {
   const isProductionMode = argv.mode === 'production';
@@ -114,6 +115,7 @@ module.exports = (_, argv) => {
       new ESLintPlugin({
         extensions: ['ts', 'tsx', 'js', 'jsx'],
       }),
+      new StylelintPlugin()
     ],
   };
 };
