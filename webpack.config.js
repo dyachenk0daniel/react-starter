@@ -115,7 +115,7 @@ module.exports = (_, argv) => {
       new ESLintPlugin({
         extensions: ['ts', 'tsx', 'js', 'jsx'],
       }),
-      new StylelintPlugin()
+      new StylelintPlugin(),
     ],
   };
 };
