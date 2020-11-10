@@ -6,9 +6,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
 
-.ohMy {
-  color: pink;
-  font-size: 5em;
+  &__title {
+    color: #ec407a;
+    font-size: 5em;
+  }
 }

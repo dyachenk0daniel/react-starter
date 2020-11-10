@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "run": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --watch",
     "prettier": "prettier --write .",
