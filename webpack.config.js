@@ -25,11 +25,11 @@ module.exports = (_, argv) => {
       index: 'index.html',
       contentBase: path.join(__dirname, 'public'), // Расположение статических файлов
       watchContentBase: true, // Изменение файлов вызывает полную перезагрузку страницы.
-      compress: true, // Включить сжатие gzip
+      //compress: true, // Включить сжатие gzip
       hot: true, // Горячая замена модуля
       open: true,
       port: 4200,
-      noInfo: true, // Только ошибки и предупреждения о горячей перезагрузке
+      // noInfo: true, // Только ошибки и предупреждения о горячей перезагрузке
     },
     devtool: isProductionMode ? false : 'inline-source-map',
     module: {

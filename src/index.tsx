@@ -1,6 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import App from './App';
+import ErrorHandling from './components/ErrorHandling/ErrorHandling';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const rootContainer = document.querySelector('body > #root');
+
+ReactDOM.render(
+  <ErrorHandling>
+    <App />
+  </ErrorHandling>,
+  rootContainer
+);
