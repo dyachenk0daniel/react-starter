@@ -1,6 +1,18 @@
 @use './styles/mixins.scss';
 @use './styles/functions.scss';
 
+$heartbeatMinSize: 0.8;
+$heartbeatMaxSize: 1.2;
+$heartbeatMap: (
+  0: $heartbeatMinSize,
+  25: $heartbeatMinSize,
+  35: $heartbeatMaxSize,
+  50: $heartbeatMaxSize - 0.2,
+  65: $heartbeatMaxSize,
+  75: $heartbeatMinSize,
+  100: $heartbeatMinSize
+);
+
 .root {
   height: 100vh;
   padding: 16px;
@@ -15,29 +27,14 @@
 
   .title {
     color: functions.getColor('pink', '500');
+    font-family: Sofia, cursive;
     font-size: 5em;
 
     @keyframes heartbeat {
-      0% {
-        transform: scale(0.8);
-      }
-      25% {
-        transform: scale(0.8);
-      }
-      35% {
-        transform: scale(1.2);
-      }
-      50% {
-        transform: scale(1);
-      }
-      65% {
-        transform: scale(1.2);
-      }
-      75% {
-        transform: scale(0.8);
-      }
-      100% {
-        transform: scale(0.8);
+      @each $key, $value in $heartbeatMap {
+        #{$key}% {
+          transform: scale($value);
+        }
       }
     }
 
