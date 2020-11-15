@@ -1,21 +1,40 @@
+@use './styles/mixins.scss';
+@use './styles/functions.scss';
+
 .root {
   height: 100vh;
   padding: 16px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(
+    45deg,
+    functions.getColor('pink', '100'),
+    functions.getColor('amber', '100'),
+    functions.getColor('cyan', '100')
+  );
+  @include mixins.flexCenter;
 
   .title {
-    color: #ec407a;
+    color: functions.getColor('pink', '500');
     font-size: 5em;
 
     @keyframes heartbeat {
       0% {
         transform: scale(0.8);
       }
-      50% {
+      25% {
+        transform: scale(0.8);
+      }
+      35% {
         transform: scale(1.2);
+      }
+      50% {
+        transform: scale(1);
+      }
+      65% {
+        transform: scale(1.2);
+      }
+      75% {
+        transform: scale(0.8);
       }
       100% {
         transform: scale(0.8);
@@ -24,7 +43,7 @@
 
     .heart {
       display: inline-block;
-      animation: heartbeat .8s linear infinite;
+      animation: heartbeat 1.1s linear infinite;
     }
   }
 }

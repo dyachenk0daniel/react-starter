@@ -1,0 +1,6 @@
+@use "sass:map";
+@use 'colors';
+
+@function getColor($colorName, $number) {
+  @return map.get(colors.$materialColors, $colorName, $number);
+}

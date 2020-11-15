@@ -1,6 +1,8 @@
+@use '../../styles/mixins.scss';
+@use '../../styles/functions.scss';
+
 .root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
+  @include mixins.flexCenter;
+  color: functions.getColor('pink', '600');
 }
