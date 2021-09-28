@@ -1,11 +1,16 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const {AutomaticPrefetchPlugin} = require("webpack");
 
 module.exports = (_, argv) => {
   const isProductionMode = argv.mode === 'production';
+
   return {
     mode: isProductionMode ? 'production' : 'development',
     target: 'web',
@@ -22,15 +27,22 @@ module.exports = (_, argv) => {
     },
     devServer: {
       index: 'index.html',
-      contentBase: path.join(__dirname, 'public'), // Расположение статических файлов
+      contentBase: path.join(__dirname, 'src/static'), // Расположение статических файлов
       watchContentBase: true, // Изменение файлов вызывает полную перезагрузку страницы.
       //compress: true, // Включить сжатие gzip
       hot: true, // Горячая замена модуля
-      open: true,
+      //open: true,
       port: 4200,
       // noInfo: true, // Только ошибки и предупреждения о горячей перезагрузке
     },
     devtool: isProductionMode ? false : 'inline-source-map',
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new CssMinimizerPlugin({parallel: true}),
+        new TerserPlugin({parallel: true}),
+      ],
+    },
     module: {
       rules: [
         {
@@ -41,9 +53,11 @@ module.exports = (_, argv) => {
           },
         },
         {
-          test: /\.((c|sa|sc)ss)$/i, //For Less - /\.((c|le)ss)$/i,
+          test: /\.((c|sa|sc)ss)$/i,
           use: [
-            'style-loader',
+            isProductionMode
+              ? MiniCssExtractPlugin.loader
+              : {loader: 'style-loader'},
             {
               loader: 'css-loader',
               options: {
@@ -53,6 +67,7 @@ module.exports = (_, argv) => {
                   exportGlobals: true,
                   localIdentName: '[path][name]__[local]--[hash:base64:5]',
                 },
+                sourceMap: true
               },
             },
             {
@@ -61,10 +76,12 @@ module.exports = (_, argv) => {
                 postcssOptions: {
                   plugins: ['postcss-preset-env'],
                 },
+                sourceMap: true
               },
             },
             {
               loader: 'sass-loader',
+              options: {sourceMap: true}
             },
           ],
         },
@@ -101,19 +118,22 @@ module.exports = (_, argv) => {
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: 'public/index.html',
+        template: 'src/static/index.html',
+        favicon: "src/static/favicon.ico",
       }),
       new CopyPlugin({
         patterns: [
-          { from: 'public/robots.txt' },
-          { from: 'public/favicon.ico' },
-          { from: 'public/manifest.json' },
-          { from: 'public/config.js' },
+          {from: 'src/static'},
         ],
       }),
       new ESLintPlugin({
         extensions: ['ts', 'tsx', 'js', 'jsx'],
       }),
+      new MiniCssExtractPlugin({
+        filename: "[name].bundle.css",
+        chunkFilename: "[id].css",
+      }),
+      new AutomaticPrefetchPlugin(),
     ],
   };
 };
