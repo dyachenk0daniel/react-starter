@@ -16,7 +16,7 @@
     "strictNullChecks": true, // строгая проверка null и undefined
     "esModuleInterop": true, // Взаимодействие модулей ES
     "alwaysStrict": true, // Строгий режим
-    "strictPropertyInitialization": true // Строгая инициализация свойства
+    "strictPropertyInitialization": true, // Строгая инициализация свойства
   },
   "include": [
     // Эти имена файлов разрешаются относительно каталога
@@ -26,5 +26,9 @@
     // Задает массив имен файлов или шаблонов, которые следует пропустить при разрешении include
     "node_modules",
     "**/*.spec.ts"
-  ]
+  ],
+  "typedocOptions": {
+    "entryPoints": ["src/components/ErrorHandling/ErrorHandling.tsx"],
+    "out": "docs"
+  }
 }

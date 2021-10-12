@@ -1,12 +1,12 @@
 const path = require('path');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const {AutomaticPrefetchPlugin} = require("webpack");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const { AutomaticPrefetchPlugin, ProvidePlugin } = require('webpack');
 
 module.exports = (_, argv) => {
   const isProductionMode = argv.mode === 'production';
@@ -15,11 +15,12 @@ module.exports = (_, argv) => {
     mode: isProductionMode ? 'production' : 'development',
     target: 'web',
     entry: {
-      index: './src/index.tsx',
+      index: './src/app/index.tsx',
     },
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: '[name].bundle.js',
+      clean: true,
       // publicPath: '/',
     },
     resolve: {
@@ -39,9 +40,12 @@ module.exports = (_, argv) => {
     optimization: {
       minimize: true,
       minimizer: [
-        new CssMinimizerPlugin({parallel: true}),
-        new TerserPlugin({parallel: true}),
+        new CssMinimizerPlugin({ parallel: true }),
+        new TerserPlugin({ parallel: true }),
       ],
+      splitChunks: {
+        chunks: 'all',
+      },
     },
     module: {
       rules: [
@@ -57,7 +61,7 @@ module.exports = (_, argv) => {
           use: [
             isProductionMode
               ? MiniCssExtractPlugin.loader
-              : {loader: 'style-loader'},
+              : { loader: 'style-loader' },
             {
               loader: 'css-loader',
               options: {
@@ -65,9 +69,11 @@ module.exports = (_, argv) => {
                 modules: {
                   auto: true, ///\.module\.\w+$/i.test(filename)
                   exportGlobals: true,
-                  localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                  localIdentName: isProductionMode
+                    ? '[hash:base64:5]'
+                    : '[path][name]__[local]--[hash:base64:5]',
                 },
-                sourceMap: true
+                sourceMap: true,
               },
             },
             {
@@ -76,12 +82,12 @@ module.exports = (_, argv) => {
                 postcssOptions: {
                   plugins: ['postcss-preset-env'],
                 },
-                sourceMap: true
+                sourceMap: true,
               },
             },
             {
               loader: 'sass-loader',
-              options: {sourceMap: true}
+              options: { sourceMap: true },
             },
           ],
         },
@@ -119,21 +125,22 @@ module.exports = (_, argv) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: 'src/static/index.html',
-        favicon: "src/static/favicon.ico",
+        favicon: 'src/static/favicon.ico',
       }),
       new CopyPlugin({
-        patterns: [
-          {from: 'src/static'},
-        ],
+        patterns: [{ from: 'src/static' }],
       }),
       new ESLintPlugin({
         extensions: ['ts', 'tsx', 'js', 'jsx'],
       }),
       new MiniCssExtractPlugin({
-        filename: "[name].bundle.css",
-        chunkFilename: "[id].css",
+        filename: '[name].bundle.css',
+        chunkFilename: '[id].css',
       }),
       new AutomaticPrefetchPlugin(),
+      new ProvidePlugin({
+        React: 'react',
+      }),
     ],
   };
 };

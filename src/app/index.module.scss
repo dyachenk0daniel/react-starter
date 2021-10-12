@@ -1,5 +1,5 @@
-@use './styles/mixins.scss';
-@use './styles/functions.scss';
+@use '../styles/mixins';
+@use '../styles/functions';
 
 $heartbeatMinSize: 0.8;
 $heartbeatMaxSize: 1.2;

@@ -44,6 +44,7 @@ module.exports = {
     'no-multi-spaces': 1, //запретить использование нескольких пробелов
     'no-unused-expressions': 1, //запретить неиспользуемые выражения
     'require-await': 2, //запретить async функции, у которых нет выражения await
+    'react/react-in-jsx-scope': 0,
   },
   settings: {
     // общие настройки
