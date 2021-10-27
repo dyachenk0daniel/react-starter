@@ -1,0 +1,54 @@
+@use 'sass:map';
+@use 'breakpoints' as *;
+@use "configuration";
+@use "functions";
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin media-breakpoint-up($breakpoint) {
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  @media (max-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-between($bp-start, $bp-end) {
+  @media (min-width: map.get($breakpoints, $bp-start)) and (max-width: map.get($breakpoints, $bp-end - 0.1)) {
+    @content;
+  }
+}
+
+@mixin media-down($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin calc-adaptive-size($min-size, $max-size, $property) {
+  $diff-max-min: functions.strip-units($max-size - $min-size);
+  $max-screen-size: configuration.$container-size - configuration.$min-screen-size;
+  $calc: #{calc(
+    #{$min-size} + #{$diff-max-min} *((100vw - #{configuration.$min-screen-size}px) / #{$max-screen-size})
+  )};
+
+  @if configuration.$is-full-screen {
+    #{$property}: $calc;
+  }
+
+  @else {
+    #{$property}: $max-size;
+
+    @include media-down(configuration.$container-size + 'px') {
+      #{$property}: $calc;
+    }
+  }
+}

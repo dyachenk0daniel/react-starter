@@ -19,4 +19,9 @@ declare module '*.scss' {
   export default scss;
 }
 
+declare module '*.pdf' {
+  const content: any;
+  export default content;
+}
+
 declare const React: any;

@@ -20,8 +20,6 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
-    'prettier/react',
   ],
   rules: {
     'react-hooks/rules-of-hooks': 2, //Проверяет правила хуков

@@ -1,0 +1,12 @@
+@use "sass:map";
+@use "sass:math";
+@use 'colors';
+
+@function get-color($color-name, $number) {
+  @return map.get(colors.$material-colors, $color-name, $number);
+}
+
+// Получает число из различных единиц измерения
+@function strip-units($number) {
+  @return math.div($number, $number * 0 + 1);
+}

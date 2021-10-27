@@ -6,7 +6,11 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const { AutomaticPrefetchPlugin, ProvidePlugin } = require('webpack');
+const { ProvidePlugin } = require('webpack');
+const Dotenv = require('dotenv-webpack');
+const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
+
+const srcPath = (subdir) => path.join(__dirname, 'src', subdir);
 
 module.exports = (_, argv) => {
   const isProductionMode = argv.mode === 'production';
@@ -20,21 +24,23 @@ module.exports = (_, argv) => {
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: '[name].bundle.js',
-      clean: true,
-      // publicPath: '/',
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'], // Расширения, которые используются
+      extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json'], // Расширения, которые используются
+      alias: {
+        '@': path.resolve(__dirname, 'src/'),
+        components: srcPath('components'),
+        assets: srcPath('assets'),
+        static: srcPath('static'),
+        styles: srcPath('styles'),
+      },
     },
     devServer: {
-      index: 'index.html',
-      contentBase: path.join(__dirname, 'src/static'), // Расположение статических файлов
-      watchContentBase: true, // Изменение файлов вызывает полную перезагрузку страницы.
-      //compress: true, // Включить сжатие gzip
+      static: {
+        directory: path.join(__dirname, 'src/static'),
+      },
       hot: true, // Горячая замена модуля
-      //open: true,
       port: 4200,
-      // noInfo: true, // Только ошибки и предупреждения о горячей перезагрузке
     },
     devtool: isProductionMode ? false : 'inline-source-map',
     optimization: {
@@ -42,6 +48,7 @@ module.exports = (_, argv) => {
       minimizer: [
         new CssMinimizerPlugin({ parallel: true }),
         new TerserPlugin({ parallel: true }),
+        new JsonMinimizerPlugin(),
       ],
       splitChunks: {
         chunks: 'all',
@@ -92,28 +99,12 @@ module.exports = (_, argv) => {
           ],
         },
         {
-          test: /\.(png|jpg|gif)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[name].[ext]',
-                outputPath: 'images',
-              },
-            },
-          ],
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
         },
         {
-          test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[contenthash].[ext]',
-                outputPath: 'fonts',
-              },
-            },
-          ],
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          type: 'asset/resource',
         },
         {
           test: /\.svg$/,
@@ -128,7 +119,14 @@ module.exports = (_, argv) => {
         favicon: 'src/static/favicon.ico',
       }),
       new CopyPlugin({
-        patterns: [{ from: 'src/static' }],
+        patterns: [
+          {
+            from: 'src/static',
+            globOptions: {
+              ignore: ["**/index.html", "**/favicon.ico"],
+            }
+          }
+        ],
       }),
       new ESLintPlugin({
         extensions: ['ts', 'tsx', 'js', 'jsx'],
@@ -137,10 +135,10 @@ module.exports = (_, argv) => {
         filename: '[name].bundle.css',
         chunkFilename: '[id].css',
       }),
-      new AutomaticPrefetchPlugin(),
       new ProvidePlugin({
         React: 'react',
       }),
+      new Dotenv(),
     ],
   };
 };

@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use 'breakpoints' as *;
+@use 'mixins';
+@use "colors";
+
+$headlines: (
+  1: (
+    min-font-size: 30px,
+    max-font-size: 40px,
+  ),
+  2: (
+    min-font-size: 22px,
+    max-font-size: 32px,
+  ),
+  3: (
+    min-font-size: 18px,
+    max-font-size: 28px,
+  ),
+  4: (
+    min-font-size: 14px,
+    max-font-size: 24px,
+  ),
+);
+
+@function get-headline-size($level, $value) {
+  @return map.get($headlines, $level, $value);
+}
+
+@each $level, $values in $headlines {
+  $min-font-size: get-headline-size($level, min-font-size);
+  $max-font-size: get-headline-size($level, max-font-size);
+
+  h#{$level} {
+    line-height: 1.2em;
+    color: colors.$headline;
+
+    @include mixins.calc-adaptive-size($min-font-size, $max-font-size, font-size);
+  }
+}

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./build/", // Выходной каталог
     "sourceMap": true, // Исходные карты
     "noImplicitAny": true, // Отмена любого типа
@@ -17,6 +18,10 @@
     "esModuleInterop": true, // Взаимодействие модулей ES
     "alwaysStrict": true, // Строгий режим
     "strictPropertyInitialization": true, // Строгая инициализация свойства
+    "paths": {
+      "@/*": ["src/*"],
+      "components/*": ["src/components/*"],
+    }
   },
   "include": [
     // Эти имена файлов разрешаются относительно каталога
@@ -27,8 +32,4 @@
     "node_modules",
     "**/*.spec.ts"
   ],
-  "typedocOptions": {
-    "entryPoints": ["src/components/ErrorHandling/ErrorHandling.tsx"],
-    "out": "docs"
-  }
 }

@@ -1,0 +1,9 @@
+@use '../../styles/mixins';
+@use '../../styles/functions';
+
+.error-handling {
+  height: 100vh;
+  color: functions.get-color('pink', '600');
+
+  @include mixins.flex-center;
+}

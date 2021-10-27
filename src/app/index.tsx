@@ -1,21 +1,27 @@
 import ReactDOM from 'react-dom';
 import { StrictMode } from 'react';
 
-import ErrorHandling from '../components/ErrorHandling/ErrorHandling';
+import ErrorHandling from 'components/ErrorHandling';
 
-import styles from './index.module.scss';
-import '../styles/globals.scss';
+import './styles.scss';
+import 'styles/globals.scss';
 
 const rootContainer = document.querySelector('body > #root');
+
+function App() {
+  return (
+    <div className='app'>
+      <h1 className='app__title'>
+        I <span className='app__heart'>&#10084;</span> React
+      </h1>
+    </div>
+  );
+}
 
 ReactDOM.render(
   <StrictMode>
     <ErrorHandling>
-      <div className={styles.root}>
-        <h1 className={styles.title}>
-          I <span className={styles.heart}>&#10084;</span> React
-        </h1>
-      </div>
+      <App />
     </ErrorHandling>
   </StrictMode>,
   rootContainer

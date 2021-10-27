@@ -1,0 +1,50 @@
+@use '../styles/mixins';
+@use '../styles/functions';
+
+$heartbeat-min-size: 0.8;
+$heartbeat-max-size: 1.2;
+$heartbeat-map: (
+  0: $heartbeat-min-size,
+  25: $heartbeat-min-size,
+  35: $heartbeat-max-size,
+  50: $heartbeat-max-size - 0.2,
+  65: $heartbeat-max-size,
+  75: $heartbeat-min-size,
+  100: $heartbeat-min-size,
+);
+
+.app {
+  $this: &;
+
+  height: 100vh;
+  padding: 16px;
+  box-sizing: border-box;
+  background:
+    linear-gradient(
+      45deg,
+      functions.get-color('pink', '100'),
+      functions.get-color('amber', '100'),
+      functions.get-color('cyan', '100')
+    );
+
+  @include mixins.flex-center;
+
+  #{$this}__title {
+    color: functions.get-color('pink', '500');
+    font-family: Sofia, sans-serif;
+    font-size: 5em;
+
+    @keyframes heartbeat {
+      @each $key, $value in $heartbeat-map {
+        #{$key}% {
+          transform: scale($value);
+        }
+      }
+    }
+
+    #{$this}__heart {
+      display: inline-block;
+      animation: heartbeat 1.1s linear infinite;
+    }
+  }
+}
