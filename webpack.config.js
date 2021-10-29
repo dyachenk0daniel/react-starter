@@ -26,10 +26,12 @@ module.exports = (_, argv) => {
       filename: '[name].bundle.js',
     },
     resolve: {
-      extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json'], // Расширения, которые используются
+      extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json'],
       alias: {
         '@': path.resolve(__dirname, 'src/'),
         components: srcPath('components'),
+        api: srcPath('api'),
+        utils: srcPath('utils'),
         assets: srcPath('assets'),
         static: srcPath('static'),
         styles: srcPath('styles'),
@@ -39,7 +41,7 @@ module.exports = (_, argv) => {
       static: {
         directory: path.join(__dirname, 'src/static'),
       },
-      hot: true, // Горячая замена модуля
+      hot: true,
       port: 4200,
     },
     devtool: isProductionMode ? false : 'inline-source-map',
@@ -94,7 +96,9 @@ module.exports = (_, argv) => {
             },
             {
               loader: 'sass-loader',
-              options: { sourceMap: true },
+              options: {
+                sourceMap: true,
+              },
             },
           ],
         },

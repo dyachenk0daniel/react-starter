@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './styles.scss';
 import { IErrorHandlingProps, IErrorHandlingState } from './types';
+import './styles.scss';
 
 export default class ErrorHandling extends Component<IErrorHandlingProps, IErrorHandlingState> {
   state: IErrorHandlingState = { hasError: false };

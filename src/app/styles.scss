@@ -1,5 +1,5 @@
-@use '../styles/mixins';
-@use '../styles/functions';
+@use 'src/styles/mixins';
+@use 'src/styles/functions';
 
 $heartbeat-min-size: 0.8;
 $heartbeat-max-size: 1.2;
@@ -32,7 +32,8 @@ $heartbeat-map: (
   #{$this}__title {
     color: functions.get-color('pink', '500');
     font-family: Sofia, sans-serif;
-    font-size: 5em;
+
+    @include mixins.calc-adaptive-size(40px, 80px, font-size);
 
     @keyframes heartbeat {
       @each $key, $value in $heartbeat-map {
