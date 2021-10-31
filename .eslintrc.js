@@ -27,6 +27,7 @@ module.exports = {
     'react/prop-types': 0,
     '@typescript-eslint/no-var-requires': 0, //использование операторов require
     '@typescript-eslint/explicit-module-boundary-types': 0, //Требовать явного возврата и типов аргументов
+    '@typescript-eslint/ban-types': 0,
     'no-console': 1, //запретить использование `console`
     'no-extra-parens': 1, //запретить ненужные скобки
     'array-callback-return': 1, //применять операторы return в обратных вызовах методов массива

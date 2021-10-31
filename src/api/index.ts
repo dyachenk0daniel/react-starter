@@ -47,7 +47,9 @@ export abstract class BaseApi {
     transformData,
     ...axiosConfig
   }) => {
-    const storage = new Storage<string>('auth-token');
+    const storage = new Storage<string>(
+      process.env.TOKEN_STORAGE_KEY ?? 'token'
+    );
     const token = storage.get();
 
     if (axiosConfig.url !== '/login') {

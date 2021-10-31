@@ -3,6 +3,7 @@
  *
  * @class
  * @param key - Ключ local storage
+ * @template Data
  * @example
  * ```ts
  * const storage = new Storage<TMyData>('my-storage-key');
@@ -26,4 +27,4 @@ class Storage<Data> {
   }
 }
 
-export default Storage
+export default Storage;

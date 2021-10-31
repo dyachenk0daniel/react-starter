@@ -1,5 +1,5 @@
-@use 'src/styles/mixins';
-@use 'src/styles/functions';
+@use '../../styles/mixins';
+@use '../../styles/functions';
 
 $heartbeat-min-size: 0.8;
 $heartbeat-max-size: 1.2;
@@ -13,25 +13,42 @@ $heartbeat-map: (
   100: $heartbeat-min-size,
 );
 
-.app {
+.home {
   $this: &;
 
   height: 100vh;
   padding: 16px;
   box-sizing: border-box;
-  background:
-    linear-gradient(
+
+  @include mixins.theme-light {
+    background: linear-gradient(
       45deg,
       functions.get-color('pink', '100'),
       functions.get-color('amber', '100'),
       functions.get-color('cyan', '100')
     );
+  }
+
+  @include mixins.theme-dark {
+    background: linear-gradient(
+      45deg,
+      functions.get-color('grey', '50'),
+      functions.get-color('grey', '900')
+    );
+  }
 
   @include mixins.flex-center;
 
   #{$this}__title {
-    color: functions.get-color('pink', '500');
     font-family: Sofia, sans-serif;
+
+    @include mixins.theme-light {
+      color: functions.get-color('pink', '500');
+    }
+
+    @include mixins.theme-dark {
+      color: functions.get-color('blue', '900');
+    }
 
     @include mixins.calc-adaptive-size(40px, 80px, font-size);
 
@@ -46,6 +63,21 @@ $heartbeat-map: (
     #{$this}__heart {
       display: inline-block;
       animation: heartbeat 1.1s linear infinite;
+    }
+  }
+
+  #{$this}__theme-btn {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 5px 8px;
+    cursor: pointer;
+
+    @include mixins.theme-light {
+      background-color: functions.get-color('pink', '500');
+      color: functions.get-color('pink', '50');
     }
   }
 }

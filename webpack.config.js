@@ -8,9 +8,9 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { ProvidePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
-const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
+const JsonMinimizerPlugin = require('json-minimizer-webpack-plugin');
 
-const srcPath = (subdir) => path.join(__dirname, 'src', subdir);
+const srcPath = subdir => path.join(__dirname, 'src', subdir);
 
 module.exports = (_, argv) => {
   const isProductionMode = argv.mode === 'production';
@@ -30,6 +30,7 @@ module.exports = (_, argv) => {
       alias: {
         '@': path.resolve(__dirname, 'src/'),
         components: srcPath('components'),
+        screens: srcPath('screens'),
         api: srcPath('api'),
         utils: srcPath('utils'),
         assets: srcPath('assets'),
@@ -38,6 +39,7 @@ module.exports = (_, argv) => {
       },
     },
     devServer: {
+      historyApiFallback: true,
       static: {
         directory: path.join(__dirname, 'src/static'),
       },
@@ -127,9 +129,9 @@ module.exports = (_, argv) => {
           {
             from: 'src/static',
             globOptions: {
-              ignore: ["**/index.html", "**/favicon.ico"],
-            }
-          }
+              ignore: ['**/index.html', '**/favicon.ico'],
+            },
+          },
         ],
       }),
       new ESLintPlugin({

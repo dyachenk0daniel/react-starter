@@ -5,6 +5,7 @@
 @import './headlines.scss';
 
 * {
+  border: none;
   box-sizing: border-box;
   color: colors.$text;
   line-height: 1.5em;
@@ -16,11 +17,6 @@ body {
 }
 
 code {
-  font-family:
-    source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }

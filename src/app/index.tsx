@@ -2,20 +2,18 @@ import ReactDOM from 'react-dom';
 import { StrictMode } from 'react';
 
 import ErrorHandling from 'components/ErrorHandling';
+import RoutingManager from 'components/RoutingManager';
+import setupTheme from 'utils/setupTheme';
 
-import './styles.scss';
 import 'styles/globals.scss';
+import '@/i18n';
+
+setupTheme();
 
 const rootContainer = document.querySelector('body > #root');
 
 function App() {
-  return (
-    <div className='app'>
-      <h1 className='app__title'>
-        I <span className='app__heart'>&#10084;</span> React
-      </h1>
-    </div>
-  );
+  return <RoutingManager />;
 }
 
 ReactDOM.render(

@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'breakpoints' as *;
 @use 'mixins';
-@use "colors";
+@use 'colors';
 
 $headlines: (
   1: (
@@ -34,6 +34,10 @@ $headlines: (
     line-height: 1.2em;
     color: colors.$headline;
 
-    @include mixins.calc-adaptive-size($min-font-size, $max-font-size, font-size);
+    @include mixins.calc-adaptive-size(
+      $min-font-size,
+      $max-font-size,
+      font-size
+    );
   }
 }

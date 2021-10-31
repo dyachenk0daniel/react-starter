@@ -8,14 +8,14 @@ interface IRequestConfig<TResult, TResponse> {
 /**
  * Тип для RESTApi методов
  *
- * @param TResult - Тип итоговый результат выполнения метода
+ * @param TResult - Тип итогового результата выполнения метода
  * @param TResponse - Тип возвращаемого результата запроса
  * @example
  * ```
  * protected get: TRequestMethod = config => {
     return this.send({ method: 'get', ...config });
   };
-  ```
+ ```
  */
 export type TRequestMethod = <TResult = unknown, TResponse = unknown>(
   config: AxiosRequestConfig & IRequestConfig<TResult, TResponse>
