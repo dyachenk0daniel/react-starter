@@ -7,6 +7,8 @@ import setupTheme from 'utils/setupTheme';
 
 import 'styles/globals.scss';
 import '@/i18n';
+import history from 'utils/history';
+import { Router } from 'react-router';
 
 setupTheme();
 
@@ -19,7 +21,9 @@ function App() {
 ReactDOM.render(
   <StrictMode>
     <ErrorHandling>
-      <App />
+      <Router history={history}>
+        <App />
+      </Router>
     </ErrorHandling>
   </StrictMode>,
   rootContainer

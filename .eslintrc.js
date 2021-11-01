@@ -29,7 +29,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 0, //Требовать явного возврата и типов аргументов
     '@typescript-eslint/ban-types': 0,
     'no-console': 1, //запретить использование `console`
-    'no-extra-parens': 1, //запретить ненужные скобки
+    //'no-extra-parens': 1, //запретить ненужные скобки
     'array-callback-return': 1, //применять операторы return в обратных вызовах методов массива
     'default-case': 1, //требовать регистры default в операторах switch
     eqeqeq: 1, // требуют использования `===` и `! ==`

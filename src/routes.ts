@@ -5,7 +5,7 @@ const routes = [
     path: '/',
     component: Home,
     exact: true,
-  },
+  }
 ].map(route => ({
   ...route,
   path: `/:lng?${route.path}`,

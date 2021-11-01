@@ -1,25 +1,21 @@
 import { Switch, Route } from 'react-router-dom';
-import { Router } from 'react-router';
 import routes from '@/routes';
-import history from 'utils/history';
 
 const RoutingManager = () => {
+  /*const { lng } = useParams<{ lng?: string }>();
+
+  if (!lng) return <Redirect to='/en' />;*/
+
   return (
-    <Router history={history}>
-      <Switch>
-        {routes.map((route, index) => {
-          return (
-            <Route
-              exact={route.exact}
-              path={route.path}
-              key={route.path + index}
-            >
-              <route.component />
-            </Route>
-          );
-        })}
-      </Switch>
-    </Router>
+    <Switch>
+      {routes.map((route, index) => {
+        return (
+          <Route exact={route.exact} path={route.path} key={route.path + index}>
+            <route.component />
+          </Route>
+        );
+      })}
+    </Switch>
   );
 };
 

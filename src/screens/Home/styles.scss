@@ -66,18 +66,22 @@ $heartbeat-map: (
     }
   }
 
-  #{$this}__theme-btn {
+  #{$this}__btns-container {
     position: absolute;
     top: 50px;
     right: 50px;
-    border-radius: 8px;
     font-size: 14px;
-    padding: 5px 8px;
-    cursor: pointer;
 
-    @include mixins.theme-light {
-      background-color: functions.get-color('pink', '500');
-      color: functions.get-color('pink', '50');
+    #{$this}__theme-btn {
+      border-radius: 8px;
+      padding: 5px 8px;
+      cursor: pointer;
+      margin-left: 10px;
+
+      @include mixins.theme-light {
+        background-color: functions.get-color('pink', '500');
+        color: functions.get-color('pink', '50');
+      }
     }
   }
 }

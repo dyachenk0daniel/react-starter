@@ -8,7 +8,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    supportedLngs: ['ru', 'en'],
+    supportedLngs: ['en', 'ru'],
     detection: {
       order: [
         'path',
