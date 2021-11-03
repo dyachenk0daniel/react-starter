@@ -10,6 +10,7 @@ const { ProvidePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const JsonMinimizerPlugin = require('json-minimizer-webpack-plugin');
 
+const ASSET_PATH = process.env.ASSET_PATH || '/';
 const srcPath = subdir => path.join(__dirname, 'src', subdir);
 
 module.exports = (_, argv) => {
@@ -24,6 +25,7 @@ module.exports = (_, argv) => {
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: '[name].bundle.js',
+      publicPath: ASSET_PATH,
     },
     resolve: {
       extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json'],

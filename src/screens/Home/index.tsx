@@ -1,8 +1,8 @@
+import i18n from "i18next";
 import { useTranslation } from 'react-i18next';
 import switchTheme from 'utils/switchTheme';
 import switchLanguage from 'utils/switchLanguage';
 import { selectOptions } from 'screens/Home/constants';
-import i18n from "i18next";
 import './styles.scss';
 
 function Home() {
