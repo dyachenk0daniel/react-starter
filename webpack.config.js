@@ -63,13 +63,6 @@ module.exports = (_, argv) => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx|tsx|ts)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-          },
-        },
-        {
           test: /\.((c|sa|sc)ss)$/i,
           use: [
             isProductionMode
@@ -105,6 +98,13 @@ module.exports = (_, argv) => {
               },
             },
           ],
+        },
+        {
+          test: /\.(js|jsx|tsx|ts)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+          },
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
