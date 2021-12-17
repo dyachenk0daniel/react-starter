@@ -10,7 +10,9 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "docs": "typedoc --tsconfig ./tsconfig.json",
-    "test": "jest"
+    "test": "jest",
+    "build image": "docker build -t client-app .",
+    "run image": "docker run -p 80:80 client-app"
   },
   "keywords": [
     "React",
