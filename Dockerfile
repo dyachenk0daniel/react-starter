@@ -16,7 +16,10 @@ COPY . /usr/app/client/
 RUN npm run build
 
 # Build react server
-FROM nginx:1.16.0-alpine
+FROM nginx:1.19.4-alpine
+
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
 
 # Copying the application to the server
 COPY --from=builder /usr/app/client/build /usr/share/nginx/html
