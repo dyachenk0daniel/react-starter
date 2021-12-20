@@ -12,7 +12,10 @@
     "docs": "typedoc --tsconfig ./tsconfig.json",
     "test": "jest",
     "build image": "docker build -t client-app .",
-    "run image": "docker run -p 80:80 client-app"
+    "run image": "docker run -p 80:80 client-app",
+    "stop all containers": "docker stop $(docker ps -a -q)",
+    "remove all images": "docker rmi $(docker images -a -q)",
+    "remove all containers": "docker rm $(docker ps -a -q)"
   },
   "keywords": [
     "React",
