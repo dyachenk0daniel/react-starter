@@ -1,4 +1,5 @@
-import i18n from "i18next";
+import React from 'react';
+import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import switchTheme from 'utils/switchTheme';
 import switchLanguage from 'utils/switchLanguage';

@@ -1,6 +1,6 @@
 import { BaseApi } from '@/api';
 import { IPostResponse, IPostsApi } from 'api/posts/types';
-import debounce from '@danieldyachenko/debounce';
+import debounce from "utils/debounce";
 
 class PostsApi extends BaseApi implements IPostsApi {
   @debounce(1000)
