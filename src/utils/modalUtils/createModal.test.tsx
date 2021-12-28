@@ -1,6 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import modalUtils from 'utils/modalUtils';
+import modalUtils from 'utils/modalUtils/index';
 
 const Modal = () => <p>paragraph</p>;
 let removeFn: (() => void) | null = null;

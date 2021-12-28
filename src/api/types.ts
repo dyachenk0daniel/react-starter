@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 
 interface IRequestConfig<TResult, TResponse> {
-  ignoreAuthError?: boolean;
+  isAuth?: boolean;
   transformData?: (response: TResponse) => TResult;
 }
 
@@ -20,3 +20,10 @@ interface IRequestConfig<TResult, TResponse> {
 export type TRequestMethod = <TResult = unknown, TResponse = unknown>(
   config: AxiosRequestConfig & IRequestConfig<TResult, TResponse>
 ) => Promise<TResult>;
+
+export interface IApiConfig {
+  baseURL?: string;
+  tokenStorageKey?: string;
+  logoutFn?: () => void;
+  errorHandlingFn?: (error: AxiosError) => void;
+}

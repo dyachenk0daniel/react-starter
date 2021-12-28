@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { TRequestMethod } from './types';
+import axios, {AxiosError} from 'axios';
+import { IApiConfig, TRequestMethod } from './types';
 import Storage from 'utils/storage';
 
 enum Methods {
@@ -20,10 +20,15 @@ enum Methods {
  * ```
  */
 export abstract class BaseApi {
-  private readonly baseURL: string | undefined;
+  private tokenStorageKey = 'token';
+  private baseURL = 'http://localhost';
+  private logoutFn: (() => void) | null = null;
+  private errorHandlingFn: ((error: AxiosError) => void) | null = null;
 
-  constructor() {
-    this.baseURL = process.env.BASE_URL;
+  protected constructor(apiConfig?: IApiConfig) {
+    if (apiConfig) {
+      Object.assign(this, apiConfig);
+    }
   }
 
   protected get: TRequestMethod = config => {
@@ -43,16 +48,14 @@ export abstract class BaseApi {
   };
 
   private send: TRequestMethod = async ({
-    ignoreAuthError,
+    isAuth,
     transformData,
     ...axiosConfig
   }) => {
-    const storage = new Storage<string>(
-      process.env.TOKEN_STORAGE_KEY ?? 'token'
-    );
+    const storage = new Storage<string>(this.tokenStorageKey);
     const token = storage.get();
 
-    if (axiosConfig.url !== '/login') {
+    if (isAuth) {
       axiosConfig.headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -67,10 +70,10 @@ export abstract class BaseApi {
 
       return data;
     } catch (error) {
-      if (error.response.status === 403 && !ignoreAuthError) {
-        // logout
-      } else {
-        // error handling
+      if (this.logoutFn && error.response.status === 403 && !isAuth) {
+        this.logoutFn();
+      } else if (this.errorHandlingFn) {
+        this.errorHandlingFn(error);
       }
 
       throw error.message;
