@@ -60,6 +60,10 @@ module.exports = (_, argv) => {
         chunks: 'all',
       },
     },
+    performance: {
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000
+    },
     module: {
       rules: [
         {

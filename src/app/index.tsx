@@ -1,11 +1,10 @@
 import ReactDOM from 'react-dom';
 import { StrictMode } from 'react';
-import { Router } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import ErrorHandling from 'components/ErrorHandling';
 import RoutingManager from 'components/RoutingManager';
 import Modals from 'components/Modals';
 import setupTheme from 'utils/setupTheme';
-import history from 'utils/history';
 import 'styles/globals.scss';
 import '@/i18n';
 
@@ -20,10 +19,10 @@ function App() {
 ReactDOM.render(
   <StrictMode>
     <ErrorHandling>
-      <Router history={history}>
+      <BrowserRouter>
         <App />
         <Modals />
-      </Router>
+      </BrowserRouter>
     </ErrorHandling>
   </StrictMode>,
   rootContainer
