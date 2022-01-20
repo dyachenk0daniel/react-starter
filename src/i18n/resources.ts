@@ -5,6 +5,7 @@ const resources = {
       'switch-language': 'Switch language',
       i: 'I',
       react: 'React',
+      'home-title': 'Home',
     },
   },
   ru: {
@@ -13,6 +14,7 @@ const resources = {
       'switch-language': 'Переключить язык',
       i: 'Я',
       react: 'Реакт',
+      'home-title': 'Домашняя',
     },
   },
 };

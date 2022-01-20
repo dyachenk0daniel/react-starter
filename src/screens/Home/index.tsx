@@ -2,6 +2,7 @@ import React from 'react';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import useTitle from "@/hooks/useTitle";
 import switchTheme from 'utils/switchTheme';
 import switchLanguage from 'utils/switchLanguage';
 import { selectOptions } from 'screens/Home/constants';
@@ -9,6 +10,7 @@ import './styles.scss';
 
 function Home() {
   const { t } = useTranslation();
+  useTitle(t('home-title'));
   const navigate = useNavigate();
 
   return (

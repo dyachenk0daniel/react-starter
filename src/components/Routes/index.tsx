@@ -1,8 +1,8 @@
 import { useRoutes } from 'react-router-dom';
 import routes from "@/routes";
 
-const RoutingManager = () => {
+const Routes = () => {
   return useRoutes(routes);
 };
 
-export default RoutingManager;
+export default Routes;
